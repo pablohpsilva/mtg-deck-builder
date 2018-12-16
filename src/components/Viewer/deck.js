@@ -13,22 +13,23 @@ function Deck ({ name = 'Main deck', viewCard }) {
     const [groupedCards, setGroupedCards] = useState([])
     const deckCardsList = Object.values(groupedCards).reduce((acc, curr) => acc.concat(curr), [])
 
-    function handleMouseOver(card) {
-        return () => {
-            if (viewCard) {
-                viewCard(card)
-            }
+    function triggerViewCard (card) {
+        if (viewCard) {
+            viewCard(card)
         }
+    }
+
+    function handleMouseOver(card) {
+        return () => triggerViewCard(card)
     }
 
     function handleMouseOut() {
-        if (viewCard) {
-            viewCard(null)
-        }
+        triggerViewCard(null)
     }
 
-    function handleCardSelection (item) {
-        const groupped = generateGroupedCards(deckCardsList.concat(createCard(item)))
+    function handleCardSelection (card) {
+        const groupped = generateGroupedCards(deckCardsList.concat(createCard(card)))
+        triggerViewCard(card)
         setGroupedCards(groupped)
     }
 
@@ -62,7 +63,7 @@ function Deck ({ name = 'Main deck', viewCard }) {
     return (
         <div>
             <h3>{name} ({deckCardsList.length} cards)</h3>
-            <div>
+            <div style={{ marginBottom: '20px' }}>
                 <CardAutocomplete
                     labelName="Card"
                     format="Modern"
