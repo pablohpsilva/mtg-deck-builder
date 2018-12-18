@@ -1,0 +1,23 @@
+.share {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.share__link {
+  width: 320px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.share__linklabel {
+  flex: 30%;
+  text-align: left;
+}
+
+.share__linkinput {
+  flex: 70%;
+}

@@ -1,0 +1,32 @@
+.viewer {
+  display: grid;
+  width: 100%;
+  grid-template: "main  side  card";
+  grid-template-columns: calc(40% - 8px) calc(40% - 8px) calc(20% - 8px);
+  grid-gap: 8px;
+  box-sizing: border-box;
+}
+
+.viewer > * {
+  box-sizing: border-box;
+}
+
+.viewer__deckmain {
+  grid-area: main;
+}
+
+.viewer__deckside {
+  grid-area: side;
+}
+
+.viewer__deckcard {
+  grid-area: card;
+}
+
+.viewer__deckmain,
+.viewer__deckside,
+.viewer__deckcard {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
