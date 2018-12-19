@@ -1,0 +1,18 @@
+.carditem {
+    display: grid;
+    grid-template: 
+        "image    input   name  delete" 40px / 40px 30px 1fr 20px;
+}
+.carditem__art {
+    grid-area: image;
+    height: 100%;
+}
+.carditem__input {
+    grid-area: input;
+}
+.carditem__name {
+    grid-area: name;
+}
+.carditem__delete {
+    grid-area: delete;
+}

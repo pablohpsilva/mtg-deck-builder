@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import './styles.css'
 
 function CardItem({
   className,
@@ -40,17 +41,30 @@ function CardItem({
   }
 
   return (
-    <div className={className}>
+    <div
+      className={`${className || ''} carditem`}>
+      <img
+        className="carditem__art"
+        src={card.imageUrl}
+        alt="card art" />
       <input
+        className="carditem__input"
         onChange={handleCardQuantityChange(type, card)}
         value={card.__mtgdb_quantity}
         min={1}
         type="number"
       />
-      <span onMouseOver={handleMouseOver(card)} onMouseOut={handleMouseOut}>
+      <span
+        className="carditem__name"
+        onMouseOver={handleMouseOver(card)}
+        onMouseOut={handleMouseOut}>
         {card.name}
       </span>
-      <button onClick={handleRemoveCard(type, card)}>x</button>
+      <button
+        className="carditem__delete"
+        onClick={handleRemoveCard(type, card)}>
+        x
+      </button>
     </div>
   );
 }

@@ -10,8 +10,8 @@ function generateGroupedCards(cards) {
   return groupByType(cards);
 }
 
-function Deck({ name = "Main deck", className, viewCard }) {
-  const [groupedCards, setGroupedCards] = useState([]);
+function Deck ({ name = "Main deck", className, viewCard, deckCards = {}, updateDeck}) {
+  const [groupedCards, setGroupedCards] = useState(deckCards);
   const deckCardsList = Object.values(groupedCards).reduce(
     (acc, curr) => acc.concat(curr),
     []
@@ -28,7 +28,12 @@ function Deck({ name = "Main deck", className, viewCard }) {
       deckCardsList.concat(createCard(card))
     );
     triggerViewCard(card);
-    setGroupedCards(groupped);
+    updateGroupedCards(groupped);
+  }
+
+  function updateGroupedCards (cards) {
+    updateDeck('pablo', cards)
+    setGroupedCards(cards);
   }
 
   function handleCardQuantityChange(type, card, value) {
@@ -36,7 +41,7 @@ function Deck({ name = "Main deck", className, viewCard }) {
     const deckCardsByType = deckCards[type];
     const selectedCardIndex = deckCardsByType.indexOf(card);
     deckCards[type][selectedCardIndex].__mtgdb_quantity = value;
-    setGroupedCards(deckCards);
+    updateGroupedCards(deckCards);
   }
 
   function handleRemoveCard(type, card) {
@@ -47,7 +52,7 @@ function Deck({ name = "Main deck", className, viewCard }) {
     if (!deckCards[type].length) {
       delete deckCards[type];
     }
-    setGroupedCards(deckCards);
+    updateGroupedCards(deckCards);
   }
 
   function createCard(card) {
@@ -68,7 +73,7 @@ function Deck({ name = "Main deck", className, viewCard }) {
       </div>
       <div>
         {Object.keys(groupedCards).map(key => (
-          <div key={key}>
+          <React.Fragment key={key}>
             {groupedCards[key].map(card => (
               <CardItem
                 {...{
@@ -80,26 +85,11 @@ function Deck({ name = "Main deck", className, viewCard }) {
                   removeCard: handleRemoveCard
                 }}
               />
-              // <div key={card.id}>
-              //   <input
-              //     onChange={handleCardQuantityChange(key, card.id)}
-              //     value={card.__mtgdb_quantity}
-              //     min={1}
-              //     type="number"
-              //   />
-              //   <span
-              //     onMouseOver={handleMouseOver(card)}
-              //     onMouseOut={handleMouseOut}
-              //   >
-              //     {card.name}
-              //   </span>
-              //   <button onClick={handleRemoveCard(key, card)}>x</button>
-              // </div>
             ))}
             <span>
               {groupedCards[key].length} {key}
             </span>
-          </div>
+          </React.Fragment>
         ))}
       </div>
     </div>
@@ -110,6 +100,8 @@ Deck.propTypes = {
   className: PropTypes.string,
   name: PropTypes.string,
   cards: PropTypes.array,
+  deckCards: PropTypes.object,
+  updateDeck: PropTypes.func,
   viewCard: PropTypes.func
 };
 
