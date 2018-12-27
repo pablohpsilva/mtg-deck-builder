@@ -1,0 +1,19 @@
+.editor {
+    display: grid;
+    grid-template: 
+        "name  format  share" 1fr / 1fr 1fr 2fr;
+    grid-gap: 4px;
+    margin-bottom: 12px;
+}
+
+.editor .share {
+    grid-area: share;
+}
+
+.editor .editor__deckname {
+    grid-area: name;
+}
+
+.editor .editor__deckformat {
+    grid-area: format;
+}

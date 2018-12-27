@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Share from './components/Share';
-import Editor from './components/Editor';
+import Header from './components/Header';
 import Viewer from './components/Viewer';
 
 class App extends Component {
@@ -9,9 +8,8 @@ class App extends Component {
     return (
       <div className="App">
         <section>
-          <Editor/>
+          <Header/>
           <Viewer/>
-          <Share/>
         </section>
       </div>
     );

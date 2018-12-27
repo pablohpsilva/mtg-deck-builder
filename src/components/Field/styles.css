@@ -1,0 +1,15 @@
+.field {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 4px;
+    position: relative;
+    flex-direction: column;
+    border: 1px solid #000;
+}
+
+.field__label {
+    flex: 1;
+    font-size: 10px;
+    margin-bottom: 4px;
+}

@@ -1,0 +1,8 @@
+.selectfield__select {
+    flex: 1;
+    border: none;
+    font-size: 14px;
+    outline: none;
+    background: transparent;
+    width: 100%;
+}
