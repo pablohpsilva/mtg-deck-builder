@@ -3,6 +3,7 @@ import CardAutocomplete from "../CardAutocomplete";
 import PropTypes from "prop-types";
 import { groupBy } from "ramda";
 import CardItem from "../CardItem";
+import "./styles.css";
 
 const groupByType = groupBy(card => card.types);
 
@@ -10,7 +11,7 @@ function generateGroupedCards(cards) {
   return groupByType(cards);
 }
 
-function Deck ({ name = "Main deck", className, viewCard, deckCards = {}, updateDeck}) {
+function Deck ({ name, className, viewCard, deckCards = {}, updateDeck}) {
   const [groupedCards, setGroupedCards] = useState(deckCards);
   const deckCardsList = Object.values(groupedCards).reduce(
     (acc, curr) => acc.concat(curr),
@@ -32,7 +33,7 @@ function Deck ({ name = "Main deck", className, viewCard, deckCards = {}, update
   }
 
   function updateGroupedCards (cards) {
-    updateDeck('pablo', cards)
+    updateDeck(cards)
     setGroupedCards(cards);
   }
 
@@ -60,20 +61,22 @@ function Deck ({ name = "Main deck", className, viewCard, deckCards = {}, update
   }
 
   return (
-    <div className={className}>
+    <div className={`${className || ''} deck`}>
       <h3>
         {name} ({deckCardsList.length} cards)
       </h3>
-      <div style={{ marginBottom: "20px" }}>
+
+      <div className="deckeditor__autocompletewrapper">
         <CardAutocomplete
           labelName="Card"
           format="Modern"
           selectCard={handleCardSelection}
         />
       </div>
-      <div>
+
+      <div className="deck__groupedcardswrapper">
         {Object.keys(groupedCards).map(key => (
-          <React.Fragment key={key}>
+          <div className="deck__groupedcards" key={key}>
             {groupedCards[key].map(card => (
               <CardItem
                 {...{
@@ -86,10 +89,10 @@ function Deck ({ name = "Main deck", className, viewCard, deckCards = {}, update
                 }}
               />
             ))}
-            <span>
+            <span className="deck__groupedtype">
               {groupedCards[key].length} {key}
             </span>
-          </React.Fragment>
+          </div>
         ))}
       </div>
     </div>
@@ -98,7 +101,7 @@ function Deck ({ name = "Main deck", className, viewCard, deckCards = {}, update
 
 Deck.propTypes = {
   className: PropTypes.string,
-  name: PropTypes.string,
+  name: PropTypes.string.isRequired,
   cards: PropTypes.array,
   deckCards: PropTypes.object,
   updateDeck: PropTypes.func,

@@ -42,7 +42,9 @@ function CardItem({
 
   return (
     <div
-      className={`${className || ''} carditem`}>
+      className={`${className || ''} carditem`}
+      onMouseOver={handleMouseOver(card)}
+      onMouseOut={handleMouseOut}>
       <img
         className="carditem__art"
         src={card.imageUrl}
@@ -55,16 +57,16 @@ function CardItem({
         type="number"
       />
       <span
-        className="carditem__name"
-        onMouseOver={handleMouseOver(card)}
-        onMouseOut={handleMouseOut}>
+        className="carditem__name">
         {card.name}
       </span>
-      <button
-        className="carditem__delete"
-        onClick={handleRemoveCard(type, card)}>
-        x
-      </button>
+      <div className="carditem__deletewrapper">
+        <button
+          className="carditem__delete"
+          onClick={handleRemoveCard(type, card)}>
+          x
+        </button>
+      </div>
     </div>
   );
 }

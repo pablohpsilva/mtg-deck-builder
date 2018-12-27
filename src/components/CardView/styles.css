@@ -1,0 +1,20 @@
+.cardview {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.cardview__imagewrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.cardview__image {
+    width: 100%;
+}
+
+.cardview__text {
+    font-size: 12px;
+    text-align: left;
+}

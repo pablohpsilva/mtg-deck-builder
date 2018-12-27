@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types';
 import Autocomplete from 'react-autocomplete'
+import './item.css'
 const mtg = require('mtgsdk')
 let timeout;
 
@@ -30,7 +31,6 @@ function CardAutocomplete ({ labelName, format = 'Modern', value, selectCard }) 
     const queryDebounced = debounce((value, format) => {
         queryMTGOpenAPI(value, format)
             .then(result => {
-                console.log(result)
                 setCards(result)
             })
     })
@@ -71,10 +71,15 @@ function CardAutocomplete ({ labelName, format = 'Modern', value, selectCard }) 
                 )}
                 renderItem={(item, isHighlighted) => (
                     <div
-                        className={`item ${isHighlighted ? 'item-highlighted' : ''}`}
+                        className={`cardAutocompleteItem ${isHighlighted ? 'cardAutocompleteItem--highlighted' : ''}`}
                         key={item.id}
                     >
-                        {item.name}
+                        <img
+                            className="cardAutocompleteItem__art"
+                            src={item.imageUrl}
+                            alt="card art" />
+                        <span className="cardAutocompleteItem__name">{item.name}</span>
+                        <span className="cardAutocompleteItem__set">{item.setName}</span>
                     </div>
                 )}
             />

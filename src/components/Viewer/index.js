@@ -1,56 +1,59 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import Card from "./card";
-import Deck from "./deck";
+import Card from "../CardView";
+import DeckEditor from "../DeckEditor";
+import { isEmpty, isNil } from 'ramda'
+import "./styles.css";
 
-import "./viewer.css";
-
-
-function updateLocalStorage (deckName) {
-  if (deckName) {
+function updateLocalStorage (collection, deckName) {
+  if (collection && deckName) {
     return (cardList) => {
-      window.localStorage.setItem(deckName, JSON.stringify(cardList))
+      const localCollection = window.localStorage.getItem(collection)
+      const collectionObjects = isEmpty(localCollection) || isNil(localCollection) ? {} : JSON.parse(localCollection)
+      const storableItem = Object.assign({}, collectionObjects, { [deckName]: { ...cardList} })
+      window.localStorage.setItem(collection, JSON.stringify(storableItem))
     }
   }
 }
 
-function readLocalStorage (deckName) {
-  if (deckName) {
-    return JSON.parse(window.localStorage.getItem(deckName))
+function readLocalStorage (collection) {
+  if (collection) {
+    return JSON.parse(window.localStorage.getItem(collection))
   }
 }
 
 function Viewer() {
-  const [highlightCard, setHighlightCard] = useState(
-    "https://www.lmcorp.com.br/arquivos/up/cartas_bkp/images/pt140shm.jpg"
-  );
+  const [highlightCard, setHighlightCard] = useState(null);
+  const collection = readLocalStorage('pablo')
 
-  const mainDeck = readLocalStorage('pablo')
-  console.log(mainDeck)
+  const mainDeck = (isEmpty(collection) || isNil(collection)) ? {} : collection['Main deck']
+  const sideDeck = (isEmpty(collection) || isNil(collection)) ? {} : collection['Side deck']
 
   function displayCard(card) {
-    card && setHighlightCard(card.imageUrl);
+    card && setHighlightCard(card);
   }
 
-  function handleUpdateDeck(name, deck) {
-    updateLocalStorage(name)(deck)
+  function handleUpdateDeck(collection, name) {
+    return deck => updateLocalStorage(collection, name)(deck)
   }
 
   return (
     <div className="viewer">
-      <Deck
+      <DeckEditor
         className="viewer__deckmain"
         name="Main deck"
         viewCard={displayCard}
         deckCards={mainDeck}
-        updateDeck={handleUpdateDeck}
+        updateDeck={handleUpdateDeck('pablo', 'Main deck')}
       />
-      <Deck
+      <DeckEditor
         className="viewer__deckside"
         name="Side deck"
         viewCard={displayCard}
+        deckCards={sideDeck}
+        updateDeck={handleUpdateDeck('pablo', 'Side deck')}
       />
-      <Card className="viewer__deckcard" image={highlightCard} />
+      {highlightCard ? <Card className="viewer__deckcard" image={highlightCard.imageUrl} text={highlightCard.text} /> : null }
     </div>
   );
 }

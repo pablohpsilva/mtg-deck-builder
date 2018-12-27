@@ -25,10 +25,27 @@
 }
 
 .viewer__deckmain,
-.viewer__deckside,
-.viewer__deckcard {
+.viewer__deckside {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
+}
+
+/* .viewer__deckcard,
+.viewer__deckmain,
+.viewer__deckside {
+  max-height: 50vh;
+  overflow-y: scroll;
+} */
+
+.viewer .deck__groupedcards:not(:last-child) {
+  margin-bottom: 12px;
+}
+
+.deck__groupedtype {
+  display: block;
+  text-align: center;
+  font-size: 12px;
+  font-style: italic;
 }

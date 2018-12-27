@@ -1,18 +1,59 @@
 .carditem {
     display: grid;
     grid-template: 
-        "image    input   name  delete" 40px / 40px 30px 1fr 20px;
+        "input  image  name  delete" 40px / 40px 30px 120px 25px;
+    margin-bottom: 8px;
 }
+
 .carditem__art {
     grid-area: image;
     height: 100%;
 }
+
 .carditem__input {
     grid-area: input;
+    outline: none;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 3px;
+    text-align: center;
+
 }
+
 .carditem__name {
     grid-area: name;
+    display: block;
+    padding: 0 8px;
+    margin: auto 0;
+
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: left;
+    text-overflow: ellipsis;
+    width: 100px;
 }
-.carditem__delete {
+
+.carditem__deletewrapper {
     grid-area: delete;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carditem__delete {
+    border-radius: 100%;
+    cursor: pointer;
+    height: 25px;
+    width: 25px;
+    text-align: center;
+    padding: 0;
+    line-height: 1px;
+    font-size: 10px;
+    color: #ffffff;
+    background-color: rgba(220, 53, 69, 0.6);
+    transition: background-color .36s ease;
+}
+
+.carditem__delete:hover {
+    background-color: rgba(169, 68, 66, 1);
 }

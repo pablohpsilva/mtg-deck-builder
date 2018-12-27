@@ -1,0 +1,15 @@
+.deckeditor {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.deckeditor__autocompletewrapper {
+  margin-bottom: 20px;
+}
+
+.deck__groupedcardswrapper {
+  max-height: 50vh;
+  overflow-y: auto;
+}
