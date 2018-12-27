@@ -11,6 +11,10 @@ function generateGroupedCards(cards) {
   return groupByType(cards);
 }
 
+function countCards(cards) {
+  return cards.reduce((acc, curr) => acc + Number(curr.__mtgdb_quantity), 0)
+}
+
 function Deck ({ name, className, viewCard, deckCards = {}, updateDeck}) {
   const [groupedCards, setGroupedCards] = useState(deckCards);
   const deckCardsList = Object.values(groupedCards).reduce(
@@ -63,7 +67,7 @@ function Deck ({ name, className, viewCard, deckCards = {}, updateDeck}) {
   return (
     <div className={`${className || ''} deck`}>
       <h3>
-        {name} ({deckCardsList.length} cards)
+        {name} ({countCards(deckCardsList)} cards)
       </h3>
 
       <div className="deckeditor__autocompletewrapper">
@@ -90,7 +94,7 @@ function Deck ({ name, className, viewCard, deckCards = {}, updateDeck}) {
               />
             ))}
             <span className="deck__groupedtype">
-              {groupedCards[key].length} {key}
+              {countCards(groupedCards[key])} {key}
             </span>
           </div>
         ))}
