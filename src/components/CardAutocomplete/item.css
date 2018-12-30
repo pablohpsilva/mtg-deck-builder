@@ -1,4 +1,4 @@
-.menu {
+.menu:not(:empty) {
     position: absolute;
     z-index: 10;
     max-height: 30vh;
@@ -6,7 +6,10 @@
     background-color: #ffffff;
     box-shadow: 0px 10px 22px -5px rgba(0,0,0,0.4);
     border-radius: 3px;
-    padding: 8px;
+    padding-block-start: 8px;
+    padding-block-end: 8px;
+    padding-inline-start: 8px;
+    padding-inline-end: 8px;
 }
 
 .cardAutocompleteItem {
@@ -14,8 +17,8 @@
     grid-template: 
         "image    name  " 35px
         "image    set   " 20px / 40px 140px;
-    text-align: left;
-    margin-bottom: 8px;
+    text-align: start;
+    margin-block-end: 8px;
 }
 
 .cardAutocompleteItem--highlighted {
@@ -23,7 +26,7 @@
 }
 .cardAutocompleteItem__art {
     grid-area: image;
-    width: 35px;
+    inline-size: 35px;
 }
 
 .cardAutocompleteItem__name {
@@ -40,5 +43,5 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: inherit;
+    inline-size: inherit;
 }

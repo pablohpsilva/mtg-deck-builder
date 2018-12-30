@@ -16,6 +16,10 @@ function updateLocalStorage (collection, deckName) {
   }
 }
 
+function getDeckCollection (collection, deckName) {
+  return (isEmpty(collection) || isNil(collection)) ? {} : collection[deckName]
+}
+
 function readLocalStorage (collection) {
   if (collection) {
     return JSON.parse(window.localStorage.getItem(collection))
@@ -26,8 +30,8 @@ function Viewer() {
   const [highlightCard, setHighlightCard] = useState(null);
   const collection = readLocalStorage('pablo')
 
-  const mainDeck = (isEmpty(collection) || isNil(collection)) ? {} : collection['Main deck']
-  const sideDeck = (isEmpty(collection) || isNil(collection)) ? {} : collection['Side deck']
+  const mainDeck = getDeckCollection(collection, 'Main deck')
+  const sideDeck = getDeckCollection(collection, 'Side deck')
 
   function displayCard(card) {
     card && setHighlightCard(card);

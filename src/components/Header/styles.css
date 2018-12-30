@@ -3,7 +3,7 @@
     grid-template: 
         "name  format  share" 1fr / 1fr 1fr 2fr;
     grid-gap: 4px;
-    margin-bottom: 12px;
+    margin-block-end: 12px;
 }
 
 .editor .share {

@@ -3,11 +3,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  inline-size: 100%;
 }
 
 .share__link {
-  width: 320px;
+  inline-size: 320px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -15,7 +15,7 @@
 
 .share__linklabel {
   flex: 30%;
-  text-align: left;
+  text-align: start;
 }
 
 .share__linkinput {

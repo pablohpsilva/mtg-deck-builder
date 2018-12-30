@@ -2,12 +2,12 @@
     display: grid;
     grid-template: 
         "input  image  name  delete" 40px / 40px 30px 120px 25px;
-    margin-bottom: 8px;
+    margin-block-end: 8px;
 }
 
 .carditem__art {
     grid-area: image;
-    height: 100%;
+    block-size: 100%;
 }
 
 .carditem__input {
@@ -22,15 +22,20 @@
 .carditem__name {
     grid-area: name;
     display: block;
-    padding: 0 8px;
-    margin: auto 0;
-
+    padding-block-start: 0;
+    padding-block-end: 0;
+    padding-inline-start: 8px;
+    padding-inline-end: 8px;
+    margin-block-start: auto;
+    margin-block-end: auto;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
     font-size: 12px;
     white-space: nowrap;
     overflow: hidden;
-    text-align: left;
+    text-align: start;
     text-overflow: ellipsis;
-    width: 100px;
+    inline-size: 100px;
 }
 
 .carditem__deletewrapper {
@@ -43,10 +48,13 @@
 .carditem__delete {
     border-radius: 100%;
     cursor: pointer;
-    height: 25px;
-    width: 25px;
+    block-size: 25px;
+    inline-size: 25px;
     text-align: center;
-    padding: 0;
+    padding-block-start: 0;
+    padding-block-end: 0;
+    padding-inline-start: 0;
+    padding-inline-end: 0;
     line-height: 1px;
     font-size: 10px;
     color: #ffffff;

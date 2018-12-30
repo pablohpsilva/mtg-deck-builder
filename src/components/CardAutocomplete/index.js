@@ -38,7 +38,9 @@ function CardAutocomplete ({ labelName, format = 'Modern', value, selectCard }) 
     function handleChange (format) {
         return (_, value) => {
             setSearchValue(value)
-            queryDebounced(value, format)
+            if (value && format) {
+                queryDebounced(value, format)
+            }
         }
     }
 
