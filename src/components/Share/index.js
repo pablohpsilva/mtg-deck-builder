@@ -1,8 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Box } from '../Box'
+
 import "./style.css";
 
-function Share({ id = "1872631", user = "1iu2389127" }) {
+function Share({ id, user }) {
   const defaultURL = `https://mtgdb.com/user/${user}/d/`;
 
   const handleChange = () => ({});
@@ -52,4 +54,6 @@ Share.propTypes = {
   url: PropTypes.string
 };
 
-export default Share;
+const defaultProps = { id: "1872631", user: "1iu2389127" }
+
+export default Box(Share).contramap(props => ({ ...defaultProps, ...props }));

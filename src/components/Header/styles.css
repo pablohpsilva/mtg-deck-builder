@@ -1,4 +1,4 @@
-.editor {
+.header {
     display: grid;
     grid-template: 
         "name  format  share" 1fr / 1fr 1fr 2fr;
@@ -6,14 +6,14 @@
     margin-block-end: 12px;
 }
 
-.editor .share {
+.header .share {
     grid-area: share;
 }
 
-.editor .editor__deckname {
+.header .header__deckname {
     grid-area: name;
 }
 
-.editor .editor__deckformat {
+.header .header__deckformat {
     grid-area: format;
 }

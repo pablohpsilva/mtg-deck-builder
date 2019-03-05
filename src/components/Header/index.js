@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import Input from '../Input'
 import Select from '../Select'
 import Share from '../Share';
+import { Box } from '../Box'
+
 import './styles.css'
 
 const formats = [
@@ -26,32 +28,45 @@ const formats = [
     { value: 'Silverblack', text: 'Silverblack' }
 ]
 
-function Editor() {
+const inputProps = {
+    className: 'header__deckname',
+    id: 'deckname',
+    name: 'deck name',
+    label: 'Deck name',
+    placeholder: 'Write your deck name',
+    type: 'text',
+    onChange: (c) => console.log(c.target.value)
+}
+
+const selectProps = {
+    className: "header__deckformat",
+    id: "deckformat",
+    name: "Deck format",
+    label: "Deck format",
+    options: formats
+}
+
+
+function Header ({ render, renderInput, renderSelect, renderShare, ...elementProps }) {
     return (
-        <div className="editor">
-            <Input {...{
-                className: 'editor__deckname',
-                id: 'deckname',
-                name: 'deck name',
-                label: 'Deck name',
-                placeholder: 'Write your deck name',
-                type: 'text'
-            }}/>
-
-            <Select
-                className="editor__deckformat"
-                id="deckformat"
-                name="Deck format"
-                label="Deck format"
-                options={formats} />
-
-            <Share/>
+        <div className="header">
+            {render(elementProps)}
         </div>
     )
 }
 
-Editor.propTypes = {
+Header.propTypes = {
     className: PropTypes.string
 };
 
-export default Editor
+const _Header = Box(Header)
+    .contramap(() => ({
+        render: Input
+            .concat(Select)
+            .concat(Share)
+            .fold,
+        inputProps,
+        selectProps
+    }))
+
+export default _Header.fold
