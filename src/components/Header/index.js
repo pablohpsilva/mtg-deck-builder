@@ -47,13 +47,7 @@ const selectProps = {
 }
 
 
-function Header ({ render, renderInput, renderSelect, renderShare, ...elementProps }) {
-    return (
-        <div className="header">
-            {render(elementProps)}
-        </div>
-    )
-}
+const Header = ({ render, renderInput, renderSelect, renderShare, ...elementProps }) => render(elementProps)
 
 Header.propTypes = {
     className: PropTypes.string
@@ -68,5 +62,10 @@ const _Header = Box(Header)
         inputProps,
         selectProps
     }))
+    .map(T => (
+        <div className="header">
+        {T}
+        </div>
+    ))
 
 export default _Header.fold
